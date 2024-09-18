@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-// todo: convert timestampt to human readable date
+// todo: italicize species name
 
 function createData(date, time, nickname, species, location, healthy, timestamp) {
   return { date, time, nickname, species, location, healthy, timestamp };
@@ -51,7 +51,7 @@ export default function Sightings() {
               <TableCell component="th" scope="row">
                 {row.date + " " + row.time}
               </TableCell>
-              <TableCell>{row.nickname}</TableCell>
+              <TableCell>"{row.nickname}"</TableCell>
               <TableCell>{row.species}</TableCell>
               <TableCell>{row.location}</TableCell>
               <TableCell>{`${row.healthy}`}</TableCell>

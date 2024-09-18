@@ -4,6 +4,7 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import FeaturedCreature from "./FeaturedCreature";
 import Sightings from "./Sightings";
 import AddSpecies from "./AddSpecies";
 import AddAnimal from "./AddAnimal";
@@ -28,7 +29,9 @@ export default function Tabs() {
             <Tab label="Add a new sighting" value="4" />
           </TabList>
         </Box>
-        <TabPanel value="0"></TabPanel>
+        <TabPanel value="0">
+          <FeaturedCreature />
+        </TabPanel>
         <TabPanel value="1">
           <Sightings />
         </TabPanel>
