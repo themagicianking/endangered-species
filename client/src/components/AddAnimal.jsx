@@ -4,7 +4,6 @@ export default function AddAnimal() {
     const ANIMAL = {
       animalName: event.target["animal-name"].value,
       addedBy: event.target.tracker.value,
-      timestamp: Date.now(),
     };
     console.log(ANIMAL);
 

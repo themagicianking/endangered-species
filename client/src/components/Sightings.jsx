@@ -9,8 +9,8 @@ import Paper from "@mui/material/Paper";
 
 // todo: italicize species name
 
-function createData(date, time, nickname, species, location, healthy, timestamp) {
-  return { date, time, nickname, species, location, healthy, timestamp };
+function createData(date, time, nickname, species, location, healthy) {
+  return { date, time, nickname, species, location, healthy };
 }
 
 const SIGHTINGS = [

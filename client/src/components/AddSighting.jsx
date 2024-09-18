@@ -8,7 +8,6 @@ export default function AddSighting() {
       location: event.target.location.value,
       healthy: event.target.healthy.checked,
       email: event.target.email.value,
-      timestamp: Date.now(),
     };
     console.log(SIGHTING);
 

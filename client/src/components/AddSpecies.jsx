@@ -6,7 +6,6 @@ export default function AddSpecies() {
       scientificName: event.target["scientific-name"].value,
       wildNum: event.target["wild-num"].value,
       cscode: event.target.cscode.value,
-      timestamp: Date.now(),
     };
     console.log(SPECIES);
 
