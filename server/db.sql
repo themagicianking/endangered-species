@@ -34,31 +34,24 @@ INSERT INTO
     commonName,
     scientificName,
     wildNum,
-    cscode,
-    timestamp
+    cscode
   )
 VALUES
   (
-    "African Wild Dog",
-    "Lycaon pictus",
+    'African Wild Dog',
+    'Lycaon pictus',
     1409,
-    "EN",
-    SELECT
-      NOW()
+    'EN'
   ),
   (
-    "Hector's Dolphin",
-    "Cephalorhynchus hectori",
+    'Hector''s Dolphin',
+    'Cephalorhynchus hectori',
     7000,
-    "EN",
-    SELECT
-      NOW()
+    'EN'
   ),
   (
-    "Marine Iguana",
-    "Amblyrhynchus cristatus",
+    'Marine Iguana',
+    'Amblyrhynchus cristatus',
     210000,
-    "VU",
-    SELECT
-      NOW()
+    'VU'
   );
