@@ -6,7 +6,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 
 export default function Tabs() {
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = React.useState("0");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -16,15 +16,19 @@ export default function Tabs() {
     <Box sx={{ width: "100%", typography: "body1" }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label="Item One" value="1" />
-            <Tab label="Item Two" value="2" />
-            <Tab label="Item Three" value="3" />
+          <TabList onChange={handleChange}>
+            <Tab label="Featured creature" value="0" />
+            <Tab label="Sightings" value="1" />
+            <Tab label="Add a new species" value="2" />
+            <Tab label="Add a new animal" value="3" />
+            <Tab label="Add a new sighting" value="4" />
           </TabList>
         </Box>
-        <TabPanel value="1">Item One</TabPanel>
-        <TabPanel value="2">Item Two</TabPanel>
-        <TabPanel value="3">Item Three</TabPanel>
+        <TabPanel value="0"></TabPanel>
+        <TabPanel value="1"></TabPanel>
+        <TabPanel value="2"></TabPanel>
+        <TabPanel value="3"></TabPanel>
+        <TabPanel value="4"></TabPanel>
       </TabContext>
     </Box>
   );
