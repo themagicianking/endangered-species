@@ -3,7 +3,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <p>hewwo</p>
+      <h1>Thane's Endangered Species Tracker</h1>
     </>
   );
 }
