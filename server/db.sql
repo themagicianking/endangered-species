@@ -7,7 +7,7 @@ CREATE TABLE species (
   commonName VARCHAR(255),
   scientificName VARCHAR(255),
   wildNum INTEGER,
-  cscode VARtiCHAR(2),
+  cscode VARCHAR(2),
   timestamp TIMESTAMP
 );
 
