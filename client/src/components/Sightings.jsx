@@ -9,8 +9,8 @@ import Paper from "@mui/material/Paper";
 
 // todo: convert timestampt to human readable date
 
-function createData(date, time, nickname, location, healthy, timestamp) {
-  return { date, time, nickname, location, healthy, timestamp };
+function createData(date, time, nickname, species, location, healthy, timestamp) {
+  return { date, time, nickname, species, location, healthy, timestamp };
 }
 
 const SIGHTINGS = [
@@ -18,6 +18,7 @@ const SIGHTINGS = [
     date: "07-18-1999",
     time: "6:00 PM",
     nickname: "Arcadia",
+    species: "felis domesticus",
     location: "Richmond",
     healthy: true,
     timestamp: null,
@@ -36,6 +37,7 @@ export default function Sightings() {
           <TableRow>
             <TableCell>Time of Sighting</TableCell>
             <TableCell>Nickname</TableCell>
+            <TableCell>Species</TableCell>
             <TableCell>Location</TableCell>
             <TableCell>Healthy?</TableCell>
           </TableRow>
@@ -50,6 +52,7 @@ export default function Sightings() {
                 {row.date + " " + row.time}
               </TableCell>
               <TableCell>{row.nickname}</TableCell>
+              <TableCell>{row.species}</TableCell>
               <TableCell>{row.location}</TableCell>
               <TableCell>{`${row.healthy}`}</TableCell>
             </TableRow>
