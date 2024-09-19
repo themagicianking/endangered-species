@@ -10,21 +10,25 @@ import Paper from "@mui/material/Paper";
 
 // todo: italicize species name
 
-function createData(sighting) {
-  const readableDate = new Date (sighting.datetime).toLocaleString();
-  console.log(readableDate);
-  let sightingData = {
-    id: sighting.id,
-    timeOfSighting: readableDate,
-    nickname: "",
-    commonName: "",
-    scientificName: "",
-    location: "",
-    healthy: "",
-    tracker: "",
-  };
+function createData(
+  id,
+  timeOfSighting,
+  nickname,
+  commonName,
+  scientificName,
+  location,
+  healthy,
+  tracker
+) {
   return {
-    ...sightingData,
+    id,
+    timeOfSighting,
+    nickname,
+    commonName,
+    scientificName,
+    location,
+    healthy,
+    tracker,
   };
 }
 
@@ -45,7 +49,9 @@ export default function Sightings() {
     loadSightings();
   }, [sightings]);
 
-  const rows = sightings.map((sighting) => createData(sighting));
+  const rows = sightings.map((sighting) =>
+    createData(...Object.values(sighting))
+  );
 
   return (
     <>
@@ -68,7 +74,7 @@ export default function Sightings() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.timeOfSighting}
+                    {new Date(row.timeOfSighting).toLocaleString()}
                   </TableCell>
                   <TableCell>"{row.nickname}"</TableCell>
                   <TableCell>
