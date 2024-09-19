@@ -2,8 +2,7 @@ export default function AddSighting() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const SIGHTING = {
-      date: event.target.date.value,
-      time: event.target.time.value,
+      datetime: event.target.datetime.value,
       animalName: event.target["animal-name"].value,
       location: event.target.location.value,
       healthy: event.target.healthy.checked,
@@ -16,10 +15,8 @@ export default function AddSighting() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="date">Date</label>
-      <input id="date" name="date" type="date"></input>
-      <label htmlFor="time">Time</label>
-      <input id="time" name="time" type="time"></input>
+      <label htmlFor="date">Time of Sighting</label>
+      <input id="datetime" name="datetime" type="datetime-local"></input>
       <label htmlFor="animal-name">Animal Name</label>
       <input id="animal-name" name="animal-name" type="text"></input>
       <label htmlFor="location">Location</label>

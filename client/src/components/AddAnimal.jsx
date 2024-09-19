@@ -5,6 +5,7 @@ export default function AddAnimal() {
     event.preventDefault();
     const ANIMAL = {
       animalName: event.target["animal-name"].value,
+      species: event.species.value,
       addedBy: event.target.tracker.value,
     };
     console.log(ANIMAL);

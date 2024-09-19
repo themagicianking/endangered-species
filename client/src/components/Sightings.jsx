@@ -10,17 +10,22 @@ import Paper from "@mui/material/Paper";
 
 // todo: italicize species name
 
-function createData(
-  id,
-  date,
-  time,
-  nickname,
-  species,
-  location,
-  healthy,
-  timestamp
-) {
-  return { date, time, nickname, species, location, healthy, timestamp };
+function createData(sighting) {
+  const readableDate = new Date (sighting.datetime).toLocaleString();
+  console.log(readableDate);
+  let sightingData = {
+    id: sighting.id,
+    timeOfSighting: readableDate,
+    nickname: "",
+    commonName: "",
+    scientificName: "",
+    location: "",
+    healthy: "",
+    tracker: "",
+  };
+  return {
+    ...sightingData,
+  };
 }
 
 export default function Sightings() {
@@ -40,11 +45,7 @@ export default function Sightings() {
     loadSightings();
   }, [sightings]);
 
-  console.log(sightings);
-
-  const rows = sightings.map((sighting) =>
-    createData(...Object.values(sighting))
-  );
+  const rows = sightings.map((sighting) => createData(sighting));
 
   return (
     <>
@@ -63,14 +64,16 @@ export default function Sightings() {
             <TableBody>
               {rows.map((row) => (
                 <TableRow
-                  key={row.date}
+                  key={row.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.date + " " + row.time}
+                    {row.timeOfSighting}
                   </TableCell>
                   <TableCell>"{row.nickname}"</TableCell>
-                  <TableCell>{row.species}</TableCell>
+                  <TableCell>
+                    {row.commonName + " " + row.scientificName}
+                  </TableCell>
                   <TableCell>{row.location}</TableCell>
                   <TableCell>{`${row.healthy}`}</TableCell>
                 </TableRow>
