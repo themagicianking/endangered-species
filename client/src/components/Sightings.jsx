@@ -47,7 +47,7 @@ export default function Sightings() {
 
   useEffect(() => {
     loadSightings();
-  }, [sightings]);
+  }, []);
 
   const rows = sightings.map((sighting) =>
     createData(...Object.values(sighting))

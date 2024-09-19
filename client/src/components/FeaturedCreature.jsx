@@ -22,7 +22,6 @@ export default function FeaturedCreature() {
       })
       .then((data) => {
         setCreature(data);
-        console.log(creature);
       });
   }
 
