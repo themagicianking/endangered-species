@@ -55,3 +55,15 @@ VALUES
     210000,
     'VU'
   );
+
+INSERT INTO
+  sightings(date, time, animalName, location, healthy, email)
+VALUES
+  (
+    'July 18, 1999',
+    '01:11:00',
+    'Arcadia',
+    'Richmond',
+    true,
+    'tmoonder@gmail.com'
+  );

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,6 +11,7 @@ import Paper from "@mui/material/Paper";
 // todo: italicize species name
 
 function createData(
+  id,
   date,
   time,
   nickname,
@@ -22,40 +23,28 @@ function createData(
   return { date, time, nickname, species, location, healthy, timestamp };
 }
 
-const SIGHTINGS = [
-  {
-    date: "07-18-1999",
-    time: "6:00 PM",
-    nickname: "Arcadia",
-    species: "felis domesticus",
-    location: "Richmond",
-    healthy: true,
-    timestamp: null,
-  },
-];
-
-const rows = SIGHTINGS.map((sighting) =>
-  createData(...Object.values(sighting))
-);
-
 export default function Sightings() {
-  const [sightings, setSightings] = useState({});
+  const [sightings, setSightings] = useState([]);
 
-  fetch("http://localhost:5000/sightings")
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      setSightings({
-        date: data.date,
-        time: data.time,
-        nickname: data.animalName,
-        species: data.species,
-        location: data.location,
-        healthy: data.healthy,
-        timestamp: data.createdAt,
+  async function loadSightings() {
+    await fetch("http://localhost:5000/sightings")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setSightings(data);
       });
-    });
+  }
+
+  useEffect(() => {
+    loadSightings();
+  }, [sightings]);
+
+  console.log(sightings);
+
+  const rows = sightings.map((sighting) =>
+    createData(...Object.values(sighting))
+  );
 
   return (
     <>
