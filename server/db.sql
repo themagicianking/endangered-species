@@ -54,10 +54,28 @@ VALUES
     'Amblyrhynchus cristatus',
     210000,
     'VU'
+  ),
+  (
+    'Cat',
+    'Felis domesticus',
+    600000000,
+    'LC'
   );
 
 INSERT INTO
-  sightings(datetime, animalName, location, healthy, email)
+  animals(animalName, species, tracker)
+VALUES
+  ('Arcadia', 'Cat', 'Thane'),
+  ('Cerberus', 'Cat', 'Thane');
+
+INSERT INTO
+  sightings(
+    datetime,
+    animalName,
+    location,
+    healthy,
+    email
+  )
 VALUES
   (
     'July 18, 1999, 01:11:00',

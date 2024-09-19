@@ -16,11 +16,13 @@ const pool = new Pool({
 APP.use(cors());
 APP.use(express());
 
-APP.get("/sightings", async (req, res) => {
+APP.get("/sightingsdata", async (req, res) => {
   const DATABASE = await pool.connect();
   DATABASE.release();
-  const SIGHTINGS = await DATABASE.query("SELECT * FROM sightings");
-  res.json(SIGHTINGS.rows);
+  const SIGHTINGSDATA = await DATABASE.query(
+    "SELECT sightings.id, sightings.datetime, sightings.animalName, species.commonName, species.scientificName, sightings.location, sightings.healthy, animals.tracker FROM sightings INNER JOIN animals ON animals.animalName = sightings.animalName INNER JOIN species ON animals.species = species.commonName;"
+  );
+  res.json(SIGHTINGSDATA.rows);
 });
 
 APP.get("/species", async (req, res) => {

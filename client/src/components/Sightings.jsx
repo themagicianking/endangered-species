@@ -36,7 +36,7 @@ export default function Sightings() {
   const [sightings, setSightings] = useState([]);
 
   async function loadSightings() {
-    await fetch("http://localhost:5000/sightings")
+    await fetch("http://localhost:5000/sightingsdata")
       .then((res) => {
         return res.json();
       })
