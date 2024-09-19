@@ -32,6 +32,16 @@ APP.get("/species", async (req, res) => {
   res.json(SPECIES.rows);
 });
 
+APP.get("/featuredcreature", async (req, res) => {
+  const DATABASE = await pool.connect();
+  DATABASE.release();
+  const CREATUREDATA = await DATABASE.query(
+    "SELECT animals.animalName, species.scientificName, species.cscode FROM animals INNER JOIN species ON animals.species = species.commonName;"
+  );
+  const INDEX = Math.floor(Math.random() * CREATUREDATA.rows.length);
+  res.json(CREATUREDATA.rows[INDEX]);
+});
+
 APP.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
