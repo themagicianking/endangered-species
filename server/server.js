@@ -16,17 +16,17 @@ const pool = new Pool({
 APP.use(cors());
 APP.use(express());
 
-const DATABASE = await pool.connect();
-
 APP.get("/sightings", async (req, res) => {
-  const SIGHTINGS = await DATABASE.query("SELECT * FROM sightings");
+  const DATABASE = await pool.connect();
   DATABASE.release();
+  const SIGHTINGS = await DATABASE.query("SELECT * FROM sightings");
   res.json(SIGHTINGS.rows);
 });
 
 APP.get("/species", async (req, res) => {
-  const SPECIES = await DATABASE.query("SELECT * FROM species");
+  const DATABASE = await pool.connect();
   DATABASE.release();
+  const SPECIES = await DATABASE.query("SELECT * FROM species");
   res.json(SPECIES.rows);
 });
 

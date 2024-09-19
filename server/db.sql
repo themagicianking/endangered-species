@@ -21,8 +21,7 @@ CREATE TABLE animals (
 
 CREATE TABLE sightings (
   id SERIAL PRIMARY KEY,
-  date DATE,
-  time TIME,
+  datetime TIMESTAMP,
   animalName VARCHAR(255),
   location VARCHAR(255),
   healthy BOOLEAN,
@@ -58,11 +57,10 @@ VALUES
   );
 
 INSERT INTO
-  sightings(date, time, animalName, location, healthy, email)
+  sightings(datetime, animalName, location, healthy, email)
 VALUES
   (
-    'July 18, 1999',
-    '01:11:00',
+    'July 18, 1999, 01:11:00',
     'Arcadia',
     'Richmond',
     true,
