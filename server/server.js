@@ -42,6 +42,25 @@ APP.get("/featuredcreature", async (req, res) => {
   res.json(CREATUREDATA.rows[INDEX]);
 });
 
+APP.post("/sightings", async (req, res) => {
+  const DATABASE = await pool.connect();
+  DATABASE.release();
+  const NEWSIGHTING = {
+    datetime: req.body.datetime,
+    animalname: req.body.animalName,
+    location: req.body.location,
+    healthy: req.body.healthy,
+    email: req.body.email,
+  };
+  await DATABASE.query(
+    `INSERT INTO sightings(datetime, animalName, location, healthy, email) VALUES(${(NEWSIGHTING.datetime, NEWSIGHTING.animalname, NEWSIGHTING.location, NEWSIGHTING.healthy, NEWSIGHTING.email)});`
+  );
+  const LATESTSIGHTING = await DATABASE.query(
+    "SELECT TOP(1) * FROM sightings ORDER BY sightings.sightings.id"
+  );
+  res.send(LATESTSIGHTING);
+});
+
 APP.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

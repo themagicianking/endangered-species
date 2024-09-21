@@ -8,7 +8,9 @@ export default function AddSighting() {
       healthy: event.target.healthy.checked,
       email: event.target.email.value,
     };
-    console.log(SIGHTING);
+    async function addSighting(sighting) {
+      
+    }
 
     event.target.reset();
   };
