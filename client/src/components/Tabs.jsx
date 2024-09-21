@@ -1,3 +1,5 @@
+// creates a series of tabs with each component belonging to one tab
+
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";

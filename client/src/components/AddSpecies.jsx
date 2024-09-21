@@ -1,3 +1,5 @@
+// creates a component that allows the user to add a species to the database
+// will eventually add species directly to the database
 export default function AddSpecies() {
   const handleSubmit = (event) => {
     event.preventDefault();

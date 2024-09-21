@@ -1,3 +1,5 @@
+// creates a component that allows the user to add an animal to the database.
+// will eventually add directly to the DB.
 // make species selection a dropdown menu with all the previously added species
 
 export default function AddAnimal() {

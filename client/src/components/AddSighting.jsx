@@ -1,3 +1,6 @@
+// creates a component that allows the user to add a sighting to the database
+// will eventually add directly to the DB
+
 export default function AddSighting() {
   const handleSubmit = (event) => {
     event.preventDefault();

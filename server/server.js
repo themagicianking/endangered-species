@@ -16,6 +16,7 @@ const pool = new Pool({
 APP.use(cors());
 APP.use(express());
 
+// endpoint for sightings table data
 APP.get("/sightingsdata", async (req, res) => {
   const DATABASE = await pool.connect();
   DATABASE.release();
@@ -25,6 +26,7 @@ APP.get("/sightingsdata", async (req, res) => {
   res.json(SIGHTINGSDATA.rows);
 });
 
+// endpoint for species data
 APP.get("/species", async (req, res) => {
   const DATABASE = await pool.connect();
   DATABASE.release();
@@ -32,6 +34,7 @@ APP.get("/species", async (req, res) => {
   res.json(SPECIES.rows);
 });
 
+// endpoint to get featured creature data
 APP.get("/featuredcreature", async (req, res) => {
   const DATABASE = await pool.connect();
   DATABASE.release();
@@ -42,6 +45,7 @@ APP.get("/featuredcreature", async (req, res) => {
   res.json(CREATUREDATA.rows[INDEX]);
 });
 
+// endpoint to insert new sighting into sightings table
 APP.post("/sightings", async (req, res) => {
   const DATABASE = await pool.connect();
   DATABASE.release();

@@ -1,3 +1,5 @@
+// creates a table that displays all sightings from the database
+
 import * as React from "react";
 import { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
@@ -88,7 +90,7 @@ export default function Sightings() {
           </Table>
         </TableContainer>
       ) : (
-        <p>loading data...</p>
+        <p>loading table data...</p>
       )}
     </>
   );
