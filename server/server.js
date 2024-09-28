@@ -13,8 +13,8 @@ const pool = new Pool({
   password: process.env.PASSWORD,
 });
 
+APP.use(express.json());
 APP.use(cors());
-APP.use(express());
 
 // endpoint for sightings table data
 APP.get("/sightingsdata", async (req, res) => {
@@ -49,20 +49,27 @@ APP.get("/featuredcreature", async (req, res) => {
 APP.post("/sightings", async (req, res) => {
   const DATABASE = await pool.connect();
   DATABASE.release();
-  const NEWSIGHTING = {
-    datetime: req.body.datetime,
-    animalname: req.body.animalName,
-    location: req.body.location,
-    healthy: req.body.healthy,
-    email: req.body.email,
-  };
-  await DATABASE.query(
-    `INSERT INTO sightings(datetime, animalName, location, healthy, email) VALUES(${(NEWSIGHTING.datetime, NEWSIGHTING.animalname, NEWSIGHTING.location, NEWSIGHTING.healthy, NEWSIGHTING.email)});`
-  );
-  const LATESTSIGHTING = await DATABASE.query(
-    "SELECT TOP(1) * FROM sightings ORDER BY sightings.sightings.id"
-  );
-  res.send(LATESTSIGHTING);
+  try {
+    const NEWSIGHTING = {
+      datetime: req.body.datetime,
+      animalname: req.body.animalName,
+      location: req.body.location,
+      healthy: req.body.healthy,
+      email: req.body.email,
+    };
+    console.log(req.body);
+    await DATABASE.query(
+      `INSERT INTO sightings(datetime, animalName, location, healthy, email) VALUES('${NEWSIGHTING.datetime}', '${NEWSIGHTING.animalname}', '${NEWSIGHTING.location}', '${NEWSIGHTING.healthy}', '${NEWSIGHTING.email}');`
+    );
+    console.log("post request being made");
+    const LATESTSIGHTING = await DATABASE.query(
+      "SELECT * FROM sightings WHERE id=(SELECT max(id) FROM sightings)"
+    );
+    res.send(LATESTSIGHTING);
+  } catch (e) {
+    console.log(e);
+    return res.status(400).json({ e });
+  }
 });
 
 APP.listen(PORT, () => {
