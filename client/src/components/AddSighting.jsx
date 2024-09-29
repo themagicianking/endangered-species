@@ -1,5 +1,5 @@
 // creates a component that allows the user to add a sighting to the database
-// will eventually add directly to the DB
+
 import { useState } from "react";
 
 export default function AddSighting() {
