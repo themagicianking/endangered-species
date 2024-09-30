@@ -9,7 +9,7 @@ export default function AddAnimal() {
   const [speciesList, setSpeciesList] = useState(null);
 
   async function loadSpecies() {
-   await fetch("http://localhost:5000/species")
+    await fetch("http://localhost:5000/species")
       .then((res) => {
         return res.json();
       })
@@ -22,14 +22,29 @@ export default function AddAnimal() {
     loadSpecies();
   }, []);
 
+  async function addAnimal(animal) {
+    fetch("http://localhost:5000/animals", {
+      method: "POST",
+      body: JSON.stringify(animal),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setLastAddedAnimal(data.rows[0]);
+      });
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const ANIMAL = {
       animalName: event.target["animal-name"].value,
-      species: event.species.value,
+      species: event.target.species.value,
       addedBy: event.target.tracker.value,
     };
     console.log(ANIMAL);
+    addAnimal(ANIMAL);
 
     event.target.reset();
   };
@@ -40,11 +55,13 @@ export default function AddAnimal() {
       <input id="animal-name" name="animal-name" type="text"></input>
       <label htmlFor="species">Species</label>
       <select id="species" name="species">
-        {speciesList ? (speciesList.map((species) => (
-          <option value={species.commonname}>
-            {species.commonname}, <i>"{species.scientificname}"</i>
-          </option>
-        ))) : (<option>loading...</option>)}
+        {speciesList ? (
+          speciesList.map((species) => (
+            <option value={species.commonname}>{species.commonname}</option>
+          ))
+        ) : (
+          <option>loading...</option>
+        )}
       </select>
       <label htmlFor="tracker">Tracking Scientist</label>
       <input id="tracker" name="tracker" type="text"></input>

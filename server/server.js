@@ -45,6 +45,57 @@ APP.get("/featuredcreature", async (req, res) => {
   res.json(CREATUREDATA.rows[INDEX]);
 });
 
+// endpoint to insert new species into sightings table
+APP.post("/species", async (req, res) => {
+  const DATABASE = await pool.connect();
+  DATABASE.release();
+  try {
+    const NEWSPECIES = {
+      commonName: req.body.commonName,
+      scientificName: req.body.scientificName,
+      wildNum: req.body.wildNum,
+      cscode: req.body.cscode,
+    };
+    console.log(req.body);
+    await DATABASE.query(
+      `INSERT INTO species(commonName, scientificName, wildNum, cscode) VALUES('${NEWSPECIES.commonName}', '${NEWSPECIES.scientificName}', '${NEWSPECIES.wildNum}', '${NEWSPECIES.cscode}');`
+    );
+    console.log("post request being made");
+    const LATESTSPECIES = await DATABASE.query(
+      "SELECT * FROM species WHERE id=(SELECT max(id) FROM species)"
+    );
+    res.send(LATESTSPECIES);
+  } catch (e) {
+    console.log(e);
+    return res.status(400).json({ e });
+  }
+});
+
+// endpoint to insert new animal into animals table
+APP.post("/animals", async (req, res) => {
+  const DATABASE = await pool.connect();
+  DATABASE.release();
+  try {
+    const NEWANIMAL = {
+      animalName: req.body.animalname,
+      species: req.body.species,
+      tracker: req.body.addedBy,
+    };
+    console.log(req.body);
+    await DATABASE.query(
+      `INSERT INTO animals(animalName, species, tracker) VALUES('${NEWANIMAL.animalName}', '${NEWANIMAL.species}', '${NEWANIMAL.tracker}')`
+    );
+    console.log("post request being made");
+    const LATESTANIMAL = await DATABASE.query(
+      "SELECT * FROM sightings WHERE id=(SELECT max(id) FROM animals)"
+    );
+    res.send(LATESTANIMAL);
+  } catch (e) {
+    console.log(e);
+    return res.status(400).json({ e });
+  }
+});
+
 // endpoint to insert new sighting into sightings table
 APP.post("/sightings", async (req, res) => {
   const DATABASE = await pool.connect();
